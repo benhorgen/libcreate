@@ -1,11 +1,20 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(libcreate)
 
+find_package(catkin)
 find_package(Boost REQUIRED system thread)
+
+catkin_package(
+  INCLUDE_DIRS include
+  LIBRARIES create
+  DEPENDS Boost
+)
 
 ## Specify additional locations of header files
 include_directories(
   include
+  ${catkin_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
 )
 
 ## Declare cpp library
@@ -17,6 +26,7 @@ add_library(create
 )
 
 target_link_libraries(create
+  ${catkin_LIBRARIES}
   ${Boost_LIBRARIES}
 )
 
@@ -27,14 +37,17 @@ add_executable(odom_example examples/odom_example.cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(create_demo
+  ${catkin_LIBRARIES}
   ${Boost_LIBRARIES}
   create
 )
 target_link_libraries(bumper_example
+  ${catkin_LIBRARIES}
   ${Boost_LIBRARIES}
   create
 )
 target_link_libraries(odom_example
+  ${catkin_LIBRARIES}
   ${Boost_LIBRARIES}
   create
 )
