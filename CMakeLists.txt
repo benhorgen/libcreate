@@ -4,11 +4,13 @@ project(libcreate)
 find_package(catkin)
 find_package(Boost REQUIRED system thread)
 
-catkin_package(
-  INCLUDE_DIRS include
-  LIBRARIES create
-  DEPENDS Boost
-)
+if(${catkin_FOUND})
+  catkin_package(
+    INCLUDE_DIRS include
+    LIBRARIES create
+    DEPENDS Boost
+  )
+endif(${catkin_FOUND})
 
 ## Specify additional locations of header files
 include_directories(
